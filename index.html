@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KADASHI - 3D Print Gadgets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =========================================
+           ตั้งค่าสีตัวแปร (CSS Variables) ธีม Earth Tone
+           ========================================= */
+        :root {
+            --bg-color: #EBE3D5;        /* สีพื้นหลัง (เบจ/ทราย) */
+            --box-bg: #FDFBF7;          /* สีกล่องคอนเทนต์ (ออฟไวท์) */
+            --text-main: #3E3227;       /* สีข้อความหลัก (น้ำตาลเข้ม) */
+            --text-sub: #776B5D;        /* สีข้อความรอง (น้ำตาลเทา) */
+            --btn-top-bg: #DEDBCE;      /* สีปุ่มด้านบน */
+            --btn-top-hover: #C5BCAC;   
+            --profile-border: #3E3227;  /* สีกรอบรูปโปรไฟล์ (น้ำตาลเข้ม) */
+        }
+
+        /* ========================================= */
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease; 
+        }
+        .container {
+            text-align: center;
+            background: var(--box-bg);
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .top-btn {
+            position: absolute;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--btn-top-bg);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-main);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        .top-btn:hover { background-color: var(--btn-top-hover); }
+        
+        .share-page-btn { right: 20px; }
+        .theme-toggle-btn { left: 20px; }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--profile-border); 
+            transition: border-color 0.3s ease;
+        }
+        h1 {
+            font-size: 26px;
+            margin: 0 0 5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        p {
+            color: var(--text-sub);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .link-row {
+            display: flex;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        @keyframes btn-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(150, 150, 150, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(150, 150, 150, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(150, 150, 150, 0); }
+        }
+        
+        .link-row:hover { 
+            transform: translateY(-2px); 
+            animation: btn-pulse 1.5s infinite;
+        }
+
+        .row-shopee { background-color: #ee4d2d; }
+        
+        .row-ig { 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        }
+        .row-tiktok { background-color: #000000; border: 1px solid rgba(255,255,255,0.1); }
+        .row-project { background-color: #2b2d42; }
+
+        .link-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            color: white;
+            text-decoration: none;
+            position: relative; 
+        }
+        .link-icon {
+            font-size: 20px;
+            position: absolute;
+            left: 20px; 
+            width: 25px;
+            text-align: center;
+            /* เพิ่มสีขาวให้ไอคอนดูพรีเมียมตัดกับสีปุ่ม */
+            color: #ffffff; 
+        }
+        .link-text {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .link-share {
+            width: 55px;
+            background: transparent;
+            border: none;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .link-share:hover { background-color: rgba(255, 255, 255, 0.2); }
+        
+        @media (max-width: 350px) {
+            .container { padding: 30px 15px; }
+            .top-btn { top: 15px; width: 35px; height: 35px; font-size: 14px;}
+            .share-page-btn { right: 15px; }
+            .theme-toggle-btn { left: 15px; }
+            h1 { font-size: 22px; }
+            .link-icon { left: 15px; }
+            .link-main { padding: 12px; }
+        }
+
+        /* Background Animated Shapes */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            z-index: -1;
+            pointer-events: none; /* ป้องกันการคำนวณเมาส์เพื่อลด Lag */
+        }
+        .bg-shapes li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            top: 0;
+            left: 0;
+            opacity: 0; /* ซ่อนไว้ก่อนเริ่มแอนิเมชัน */
+            will-change: transform, opacity; /* บังคับใช้ GPU */
+            backface-visibility: hidden; /* แก้ปัญหากระตุก(Jitter)เวลาขยับทีละพิกเซล */
+            transform-style: preserve-3d;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Shapes -->
+    <ul class="bg-shapes" id="bg-shapes">
+    </ul>
+    
+    <div class="container">
+        <!-- ปุ่มแชร์หน้าเว็บ (มุมขวาบน) -->
+        <button class="top-btn share-page-btn" onclick="shareLink(window.location.href, 'KADASHI - 3D Print Gadgets')" title="แชร์หน้านี้">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </button>
+
+        <img src="https://scontent.cdninstagram.com/v/t51.82787-19/671754610_17864032440671525_7139666992208324307_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=UgPcse3xiXIQ7kNvwGHhpJM&_nc_oc=Adrb7aTsJZ8kUAJiUK1Ce-Lo8xb41I-muhwtACw2Ml0XTcCg_9KPwA2pdJIBq2aDKgs&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=zapTE0W2zK4AJJCH_lqTsw&_nc_ss=7260f&oh=00_AQJjYUzCTSQkwATBxHLW5on0jYNfmXkBEcF2q2d2Yi2jJw&oe=6AB034AD" alt="KADASHI Logo" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=KADASHI&background=3E3227&color=EBE3D5&size=100&font-size=0.4'">
+        
+        <h1>KADASHI</h1>
+        <p>3D Print Gadgets & Custom Setup</p>
+        
+        <!-- รายการปุ่ม 1: Instagram (พอร์ตโฟลิโอหลัก) -->
+        <div class="link-row row-ig">
+            <a href="https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==" class="link-main" target="_blank">
+                <span class="link-icon"><i class="fa-brands fa-instagram"></i></span>
+                <span class="link-text">Instagram</span>
+            </a>
+            <button class="link-share" onclick="shareLink('https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==', 'KADASHI on IG')" title="แชร์ Instagram">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+        </div>
+
+        <!-- รายการปุ่ม 2: Shopee -->
+        <div class="link-row row-shopee">
+            <a href="https://shopee.co.th/ชื่อร้าน" class="link-main" target="_blank">
+                <!-- เปลี่ยนเป็นไอคอนถุงช้อปปิ้งของจริง -->
+                <span class="link-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span class="link-text">Shopee</span>
+            </a>
+            <button class="link-share" onclick="shareLink('https://shopee.co.th/ชื่อร้าน', 'KADASHI on Shopee')" title="แชร์ร้าน Shopee">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+        </div>
+
+        <!-- รายการปุ่ม 3: TikTok -->
+        <div class="link-row row-tiktok">
+            <a href="https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat" class="link-main" target="_blank">
+                <span class="link-icon"><i class="fa-brands fa-tiktok"></i></span>
+                <span class="link-text">TikTok</span>
+            </a>
+            <button class="link-share" onclick="shareLink('https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat', 'KADASHI on TikTok')" title="แชร์ TikTok">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+        </div>
+
+        <!-- รายการปุ่ม 4: My Projects -->
+        <div class="link-row row-project">
+            <a href="https://ลิงก์โปรเจกต์" class="link-main" target="_blank">
+                <!-- เปลี่ยนเป็นไอคอนแล็ปท็อปและโค้ด -->
+                <span class="link-icon"><i class="fa-solid fa-laptop-code"></i></span>
+                <span class="link-text">My Projects</span>
+            </a>
+            <button class="link-share" onclick="shareLink('https://ลิงก์โปรเจกต์', 'KADASHI Projects')" title="แชร์โปรเจกต์">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ระบบสุ่มพื้นหลัง (Random Background Text - KADASHI)
+        function generateShapes() {
+            const container = document.getElementById('bg-shapes');
+            container.innerHTML = ''; // Clear existing
+            
+            const numShapes = 8; // จำนวนข้อความ (ลดจาก 12 เป็น 8 ไม่ให้รกจอ)
+            const colors = [
+                'rgba(119, 107, 93, 0.2)', 'rgba(176, 166, 149, 0.2)', 
+                'rgba(138, 154, 91, 0.2)', 'rgba(226, 114, 91, 0.2)', 
+                'rgba(223, 168, 55, 0.2)', 'rgba(183, 65, 14, 0.2)', 
+                'rgba(85, 107, 47, 0.2)', 'rgba(235, 227, 213, 0.4)'
+            ];
+
+            for (let i = 0; i < numShapes; i++) {
+                const li = document.createElement('li');
+                
+                // Randomize properties
+                const size = Math.floor(Math.random() * 50) + 16; // Font size: 16px - 66px
+                const duration = Math.floor(Math.random() * 30) + 20; // 20s - 50s
+                // ใช้ Negative Delay เพื่อให้แอนิเมชันเริ่มทันที (เสมือนว่าวิ่งมาแล้ว) ทำให้เปิดหน้าเว็บมาเจอเลย
+                const delay = -(Math.random() * duration); 
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                // สุ่มทิศทาง (0: ล่างขึ้นบน, 1: บนลงล่าง, 2: ซ้ายไปขวา, 3: ขวาไปซ้าย)
+                const direction = Math.floor(Math.random() * 4);
+                let startX, startY, endX, endY;
+                
+                if (direction === 0) { // ล่าง -> บน
+                    startX = Math.random() * 100; startY = 110;
+                    endX = startX + (Math.random() * 40 - 20); endY = -20;
+                } else if (direction === 1) { // บน -> ล่าง
+                    startX = Math.random() * 100; startY = -20;
+                    endX = startX + (Math.random() * 40 - 20); endY = 110;
+                } else if (direction === 2) { // ซ้าย -> ขวา
+                    startX = -20; startY = Math.random() * 100;
+                    endX = 110; endY = startY + (Math.random() * 40 - 20);
+                } else { // ขวา -> ซ้าย
+                    startX = 110; startY = Math.random() * 100;
+                    endX = -20; endY = startY + (Math.random() * 40 - 20);
+                }
+
+                const endRot = Math.random() * 360 - 180;
+
+                // ตั้งค่าข้อความ KADASHI แทนรูปทรง
+                li.innerText = 'KADASHI';
+                
+                // Styles สำหรับ Text
+                li.style.color = color;
+                li.style.fontSize = size + 'px';
+                li.style.fontWeight = '900';
+                li.style.letterSpacing = '2px';
+                li.style.whiteSpace = 'nowrap';
+                li.style.userSelect = 'none'; // ห้ามคลุมดำ
+                li.style.background = 'transparent'; 
+                li.style.width = 'auto'; 
+                li.style.height = 'auto';
+
+                container.appendChild(li);
+
+                // ใช้ Web Animations API (WAAPI) เพื่อความลื่นไหลสูงสุด (Native Compositor)
+                li.animate([
+                    { transform: `translate3d(${startX}vw, ${startY}vh, 0) rotate(0deg)`, opacity: 0 },
+                    { opacity: 1, offset: 0.1 },
+                    { opacity: 1, offset: 0.9 },
+                    { transform: `translate3d(${endX}vw, ${endY}vh, 0) rotate(${endRot}deg)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });
+            }
+        }
+        
+        // รันฟังก์ชันเมื่อโหลดหน้าเว็บเสร็จ
+        window.addEventListener('DOMContentLoaded', generateShapes);
+
+        // ระบบแชร์ลิงก์
+        function shareLink(url, title) {
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    url: url
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert("คัดลอกลิงก์เรียบร้อยแล้ว!");
+                }).catch(err => {
+                    console.error('ไม่สามารถคัดลอกได้:', err);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
