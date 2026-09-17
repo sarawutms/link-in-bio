@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =========================================
-           ตั้งค่าสีตัวแปร (CSS Variables) ธีม Earth Tone
+           ตั้งค่าสีตัวแปร (CSS Variables) ธีม Neo-Brutalism
            ========================================= */
         :root {
             --bg-color: #EBE3D5;        /* สีพื้นหลัง (เบจ/ทราย) */
-            --box-bg: #FDFBF7;          /* สีกล่องคอนเทนต์ (ออฟไวท์) */
-            --text-main: #3E3227;       /* สีข้อความหลัก (น้ำตาลเข้ม) */
-            --text-sub: #776B5D;        /* สีข้อความรอง (น้ำตาลเทา) */
-            --btn-top-bg: #DEDBCE;      /* สีปุ่มด้านบน */
-            --btn-top-hover: #C5BCAC;   
-            --profile-border: #3E3227;  /* สีกรอบรูปโปรไฟล์ (น้ำตาลเข้ม) */
+            --text-main: #000000;       /* ดำสนิท */
+            --border-main: #000000;     /* สีกรอบดำทึบ */
+            --btn-top-bg: #FFFFFF;
         }
 
         /* ========================================= */
@@ -28,31 +25,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100dvh; 
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
             box-sizing: border-box;
-            transition: background-color 0.3s ease; 
+            background-image: radial-gradient(rgba(0, 0, 0, 0.12) 2px, transparent 2px); /* ดรอปความเข้มจุดลงให้คลีนขึ้น */
+            background-size: 25px 25px; 
         }
+        
         .container {
             text-align: center;
-            background: var(--box-bg);
-            padding: 40px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: transparent; 
+            padding: 20px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px; /* ปรับขนาดความกว้างให้พอดี สมส่วน */
             position: relative;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .top-btn {
             position: absolute;
             top: 20px;
-            width: 40px;
-            height: 40px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
             background-color: var(--btn-top-bg);
-            border: none;
+            border: 3px solid var(--border-main);
             border-radius: 50%;
             color: var(--text-main);
             font-size: 16px;
@@ -60,112 +57,126 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.3s, color 0.3s;
+            box-shadow: 4px 4px 0px var(--border-main);
+            transition: transform 0.1s, box-shadow 0.1s;
         }
-        .top-btn:hover { background-color: var(--btn-top-hover); }
-        
-        .share-page-btn { right: 20px; }
-        .theme-toggle-btn { left: 20px; }
+        .top-btn:hover, .top-btn:active { 
+            transform: translate(4px, 4px); /* Mechanical Click Effect */
+            box-shadow: 0px 0px 0px var(--border-main);
+        }
 
         .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+            width: 110px; /* ย่อลงนิดนึงให้ดูบาลานซ์ ไม่แย่งซีนปุ่ม */
+            height: 110px;
+            border-radius: 50%; 
             object-fit: cover;
-            margin: 0 auto 20px;
-            border: 3px solid var(--profile-border); 
-            transition: border-color 0.3s ease;
+            margin: 0 auto 16px;
+            border: 3px solid var(--border-main); 
+            box-shadow: 4px 4px 0px var(--border-main); 
+            transition: transform 0.1s, box-shadow 0.1s;
         }
+        .profile-pic:hover, .profile-pic:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border-main);
+        }
+        
         h1 {
-            font-size: 26px;
-            margin: 0 0 5px;
-            font-weight: 800;
+            font-size: 28px; /* ขนาดกำลังสวยในจอมือถือ */
+            margin: 0 0 10px;
+            font-weight: 900;
             letter-spacing: 1px;
+            text-transform: uppercase;
             color: var(--text-main);
+            text-shadow: 3px 3px 0px #FFF; 
         }
+        
         p {
-            color: var(--text-sub);
-            margin-bottom: 30px;
+            color: var(--text-main);
+            font-weight: 900;
+            margin-bottom: 32px;
             font-size: 14px;
+            background: #FFF;
+            display: inline-block;
+            padding: 6px 16px;
+            border: 2px solid var(--border-main);
+            box-shadow: 3px 3px 0px var(--border-main);
+            text-transform: uppercase;
+            border-radius: 50px; /* เปลี่ยนเป็นทรงแคปซูล ให้ดูมี Layer ล้อกับโปรไฟล์กลม */
         }
 
         .link-row {
             display: flex;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 8px; /* มุมมนนิดๆ (Soft-Brutalism) สวยและดูแพงขึ้น */
+            margin-bottom: 16px;
             overflow: hidden;
-            transition: transform 0.2s;
-        }
-        @keyframes btn-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(150, 150, 150, 0.5); }
-            70% { box-shadow: 0 0 0 10px rgba(150, 150, 150, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(150, 150, 150, 0); }
+            border: 3px solid var(--border-main);
+            box-shadow: 4px 4px 0px var(--border-main);
+            transition: transform 0.1s, box-shadow 0.1s;
+            background: #FFF;
         }
         
-        .link-row:hover { 
-            transform: translateY(-2px); 
-            animation: btn-pulse 1.5s infinite;
+        .link-row:hover, .link-row:active { 
+            transform: translate(4px, 4px); 
+            box-shadow: 0px 0px 0px var(--border-main);
         }
 
-        .row-shopee { background-color: #ee4d2d; }
-        
-        .row-ig { 
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-        }
-        .row-tiktok { background-color: #000000; border: 1px solid rgba(255,255,255,0.1); }
-        .row-project { background-color: #2b2d42; }
+        /* สีสันสดใสแบบ Brutalism */
+        .row-ig { background-color: #FF90E8; } /* ชมพูสดใส */
+        .row-shopee { background-color: #FF5722; } /* ส้ม */
+        .row-tiktok { background-color: #FFFFFF; } /* ขาวดำ */
+        .row-project { background-color: #00E676; } /* เขียวนีออน */
 
         .link-main {
             flex: 1;
             display: flex;
             align-items: center;
             padding: 16px;
-            color: white;
+            color: var(--text-main); /* ตัวอักษรสีดำหมด */
             text-decoration: none;
             position: relative; 
         }
         .link-icon {
-            font-size: 20px;
+            font-size: 24px;
             position: absolute;
             left: 20px; 
             width: 25px;
             text-align: center;
-            /* เพิ่มสีขาวให้ไอคอนดูพรีเมียมตัดกับสีปุ่ม */
-            color: #ffffff; 
+            color: var(--text-main); 
         }
         .link-text {
             width: 100%;
             text-align: center;
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 900;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .link-share {
-            width: 55px;
+            width: 60px;
             background: transparent;
             border: none;
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-size: 18px;
+            border-left: 3px solid var(--border-main);
+            color: var(--text-main);
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
-        .link-share:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .link-share:hover, .link-share:active { background-color: rgba(0, 0, 0, 0.1); }
         
         @media (max-width: 350px) {
             .container { padding: 30px 15px; }
-            .top-btn { top: 15px; width: 35px; height: 35px; font-size: 14px;}
+            .top-btn { top: 15px; width: 40px; height: 40px; font-size: 14px;}
             .share-page-btn { right: 15px; }
-            .theme-toggle-btn { left: 15px; }
-            h1 { font-size: 22px; }
+            h1 { font-size: 26px; }
             .link-icon { left: 15px; }
             .link-main { padding: 12px; }
         }
 
-        /* Background Animated Shapes */
+        /* Background Animated Shapes - KADASHI */
         .bg-shapes {
             position: fixed;
             top: 0;
@@ -176,7 +187,7 @@
             margin: 0;
             padding: 0;
             z-index: -1;
-            pointer-events: none; /* ป้องกันการคำนวณเมาส์เพื่อลด Lag */
+            pointer-events: none;
         }
         .bg-shapes li {
             position: absolute;
@@ -184,26 +195,59 @@
             list-style: none;
             top: 0;
             left: 0;
-            opacity: 0; /* ซ่อนไว้ก่อนเริ่มแอนิเมชัน */
-            will-change: transform, opacity; /* บังคับใช้ GPU */
-            backface-visibility: hidden; /* แก้ปัญหากระตุก(Jitter)เวลาขยับทีละพิกเซล */
+            opacity: 0;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
             transform-style: preserve-3d;
             -webkit-font-smoothing: antialiased;
+            /* Neo-Brutalism Text Style (Outline Only) */
+            color: transparent !important; 
+            -webkit-text-stroke: 2px #000;
+            font-weight: 900;
+        }
+
+        /* แจ้งเตือน Toast Popup */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            background-color: #FFF;
+            color: #000;
+            padding: 12px 24px;
+            border: 3px solid #000;
+            border-radius: 0; /* สี่เหลี่ยม */
+            font-size: 16px;
+            font-weight: 900;
+            box-shadow: 6px 6px 0px #000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.1s ease-out;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
         }
     </style>
 </head>
-<body>
+<body ontouchstart="">
     <!-- Animated Background Shapes -->
     <ul class="bg-shapes" id="bg-shapes">
     </ul>
     
     <div class="container">
         <!-- ปุ่มแชร์หน้าเว็บ (มุมขวาบน) -->
-        <button class="top-btn share-page-btn" onclick="shareLink(window.location.href, 'KADASHI - 3D Print Gadgets')" title="แชร์หน้านี้">
-            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        <button class="top-btn share-page-btn" onclick="copyLink(window.location.href)" title="คัดลอกลิงก์">
+            <i class="fa-solid fa-copy"></i>
         </button>
 
-        <img src="https://scontent.cdninstagram.com/v/t51.82787-19/671754610_17864032440671525_7139666992208324307_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=UgPcse3xiXIQ7kNvwGHhpJM&_nc_oc=Adrb7aTsJZ8kUAJiUK1Ce-Lo8xb41I-muhwtACw2Ml0XTcCg_9KPwA2pdJIBq2aDKgs&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=zapTE0W2zK4AJJCH_lqTsw&_nc_ss=7260f&oh=00_AQJjYUzCTSQkwATBxHLW5on0jYNfmXkBEcF2q2d2Yi2jJw&oe=6AB034AD" alt="KADASHI Logo" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=KADASHI&background=3E3227&color=EBE3D5&size=100&font-size=0.4'">
+        <img src="https://scontent.cdninstagram.com/v/t51.82787-19/671754610_17864032440671525_7139666992208324307_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=UgPcse3xiXIQ7kNvwGHhpJM&_nc_oc=Adrb7aTsJZ8kUAJiUK1Ce-Lo8xb41I-muhwtACw2Ml0XTcCg_9KPwA2pdJIBq2aDKgs&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=zapTE0W2zK4AJJCH_lqTsw&_nc_ss=7260f&oh=00_AQJjYUzCTSQkwATBxHLW5on0jYNfmXkBEcF2q2d2Yi2jJw&oe=6AB034AD" alt="KADASHI Logo" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=KADASHI&background=FFFFFF&color=000000&bold=true&size=120&font-size=0.4'">
         
         <h1>KADASHI</h1>
         <p>3D Print Gadgets & Custom Setup</p>
@@ -214,8 +258,8 @@
                 <span class="link-icon"><i class="fa-brands fa-instagram"></i></span>
                 <span class="link-text">Instagram</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==', 'KADASHI on IG')" title="แชร์ Instagram">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
 
@@ -226,8 +270,8 @@
                 <span class="link-icon"><i class="fa-solid fa-bag-shopping"></i></span>
                 <span class="link-text">Shopee</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://shopee.co.th/ชื่อร้าน', 'KADASHI on Shopee')" title="แชร์ร้าน Shopee">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://shopee.co.th/ชื่อร้าน')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
 
@@ -237,8 +281,8 @@
                 <span class="link-icon"><i class="fa-brands fa-tiktok"></i></span>
                 <span class="link-text">TikTok</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat', 'KADASHI on TikTok')" title="แชร์ TikTok">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
 
@@ -249,10 +293,15 @@
                 <span class="link-icon"><i class="fa-solid fa-laptop-code"></i></span>
                 <span class="link-text">My Projects</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://ลิงก์โปรเจกต์', 'KADASHI Projects')" title="แชร์โปรเจกต์">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://ลิงก์โปรเจกต์')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
+    </div>
+
+    <!-- แจ้งเตือน Toast Popup -->
+    <div id="toast-notification" class="toast">
+        <i class="fa-solid fa-circle-check"></i> คัดลอกลิงก์เรียบร้อยแล้ว!
     </div>
 
     <script>
@@ -331,22 +380,48 @@
         }
         
         // รันฟังก์ชันเมื่อโหลดหน้าเว็บเสร็จ
-        window.addEventListener('DOMContentLoaded', generateShapes);
+        window.addEventListener('DOMContentLoaded', () => {
+            generateShapes();
 
-        // ระบบแชร์ลิงก์
-        function shareLink(url, title) {
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    url: url
-                }).catch(console.error);
-            } else {
-                navigator.clipboard.writeText(url).then(() => {
-                    alert("คัดลอกลิงก์เรียบร้อยแล้ว!");
-                }).catch(err => {
-                    console.error('ไม่สามารถคัดลอกได้:', err);
+            // ระบบแปลภาษาตามเครื่อง (Auto-detect language)
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.toLowerCase().startsWith('th')) {
+                // เปลี่ยนข้อความแจ้งเตือน (Toast) เป็นภาษาอังกฤษถ้าเครื่องไม่ใช่ภาษาไทย
+                const toast = document.getElementById('toast-notification');
+                if (toast) toast.innerHTML = '<i class="fa-solid fa-circle-check"></i> Link copied!';
+                
+                // เปลี่ยน Tooltip ของปุ่มคัดลอกทั้งหมดเป็นภาษาอังกฤษ
+                const copyBtns = document.querySelectorAll('[title="คัดลอกลิงก์"]');
+                copyBtns.forEach(btn => {
+                    btn.title = "Copy Link";
                 });
             }
+        });
+
+        // ระบบแสดงแจ้งเตือน Popup สวยๆ (Toast)
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ระบบคัดลอกลิงก์ (Copy Link)
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('ไม่สามารถคัดลอกได้:', err);
+                // Fallback for older browsers
+                const tempInput = document.createElement("input");
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                showToast();
+            });
         }
     </script>
 </body>
