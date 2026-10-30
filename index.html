@@ -4,38 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KADASHI - 3D Print Gadgets</title>
-    <meta name="description" content="KADASHI - 3D Print Gadgets & Custom Setup">
-    <link rel="icon" type="image/jpeg" href="profile.jpg">
-
-    <!-- Open Graph / Social Media Preview (LINE, Facebook, etc.) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="KADASHI - 3D Print Gadgets">
-    <meta property="og:description" content="3D Print Gadgets & Custom Setup">
-    <meta property="og:image" content="profile.jpg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =========================================
-           ตั้งค่าสีตัวแปร (CSS Variables) สำหรับ 2 โหมด
+           ตั้งค่าสีตัวแปร (CSS Variables) ธีม Neo-Brutalism
            ========================================= */
         :root {
-            --bg-color: #f4f4f9;        
-            --box-bg: #ffffff;          
-            --text-main: #111111;       
-            --text-sub: #666666;        
-            --btn-top-bg: #f0f0f0;      
-            --btn-top-hover: #e0e0e0;   
-            --profile-border: #111111;  
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;        
-            --box-bg: #1e1e1e;          
-            --text-main: #ffffff;       
-            --text-sub: #aaaaaa;        
-            --btn-top-bg: #333333;      
-            --btn-top-hover: #444444;   
-            --profile-border: #ffffff;  
+            --bg-color: #EBE3D5;        /* สีพื้นหลัง (เบจ/ทราย) */
+            --text-main: #000000;       /* ดำสนิท */
+            --border-main: #000000;     /* สีกรอบดำทึบ */
+            --btn-top-bg: #FFFFFF;
         }
 
         /* ========================================= */
@@ -47,35 +25,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100dvh; 
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
             box-sizing: border-box;
-            transition: background-color 0.3s ease; 
-        }
-        .container {
-            text-align: center;
-            background: var(--box-bg);
-            padding: 40px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.12) 2px, transparent 2px); /* ดรอปความเข้มจุดลงให้คลีนขึ้น */
+            background-size: 25px 25px; 
         }
         
-        [data-theme="dark"] .container {
-             box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+        .container {
+            text-align: center;
+            background: transparent; 
+            padding: 20px;
+            width: 100%;
+            max-width: 420px; /* ปรับขนาดความกว้างให้พอดี สมส่วน */
+            position: relative;
         }
 
         .top-btn {
             position: absolute;
             top: 20px;
-            width: 40px;
-            height: 40px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
             background-color: var(--btn-top-bg);
-            border: none;
+            border: 3px solid var(--border-main);
             border-radius: 50%;
             color: var(--text-main);
             font-size: 16px;
@@ -83,280 +57,371 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.3s, color 0.3s;
+            box-shadow: 4px 4px 0px var(--border-main);
+            transition: transform 0.1s, box-shadow 0.1s;
         }
-        .top-btn:hover { background-color: var(--btn-top-hover); }
-        
-        .share-page-btn { right: 20px; }
-        .theme-toggle-btn { left: 20px; }
+        .top-btn:hover, .top-btn:active { 
+            transform: translate(4px, 4px); /* Mechanical Click Effect */
+            box-shadow: 0px 0px 0px var(--border-main);
+        }
 
         .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+            width: 110px; /* ย่อลงนิดนึงให้ดูบาลานซ์ ไม่แย่งซีนปุ่ม */
+            height: 110px;
+            border-radius: 50%; 
             object-fit: cover;
-            margin: 0 auto 20px;
-            border: 3px solid var(--profile-border); 
-            transition: border-color 0.3s ease;
-            display: block;
+            margin: 0 auto 16px;
+            border: 3px solid var(--border-main); 
+            box-shadow: 4px 4px 0px var(--border-main); 
+            transition: transform 0.1s, box-shadow 0.1s;
         }
+        .profile-pic:hover, .profile-pic:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border-main);
+        }
+        
         h1 {
-            font-size: 26px;
-            margin: 0 0 5px;
-            font-weight: 800;
+            font-size: 28px; /* ขนาดกำลังสวยในจอมือถือ */
+            margin: 0 0 10px;
+            font-weight: 900;
             letter-spacing: 1px;
+            text-transform: uppercase;
             color: var(--text-main);
+            text-shadow: 3px 3px 0px #FFF; 
         }
+        
         p {
-            color: var(--text-sub);
-            margin-bottom: 30px;
+            color: var(--text-main);
+            font-weight: 900;
+            margin-bottom: 32px;
             font-size: 14px;
+            background: #FFF;
+            display: inline-block;
+            padding: 6px 16px;
+            border: 2px solid var(--border-main);
+            box-shadow: 3px 3px 0px var(--border-main);
+            text-transform: uppercase;
+            border-radius: 50px; /* เปลี่ยนเป็นทรงแคปซูล ให้ดูมี Layer ล้อกับโปรไฟล์กลม */
         }
 
         .link-row {
             display: flex;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 8px; /* มุมมนนิดๆ (Soft-Brutalism) สวยและดูแพงขึ้น */
+            margin-bottom: 16px;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 3px solid var(--border-main);
+            box-shadow: 4px 4px 0px var(--border-main);
+            transition: transform 0.1s, box-shadow 0.1s;
+            background: #FFF;
         }
-        .link-row:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        
+        .link-row:hover, .link-row:active { 
+            transform: translate(4px, 4px); 
+            box-shadow: 0px 0px 0px var(--border-main);
         }
 
-        .row-shopee { background-color: #ee4d2d; }
-        .row-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .row-tiktok { background-color: #000000; border: 1px solid rgba(255,255,255,0.1); }
-        .row-project { background-color: #2b2d42; }
+        /* สีสันสดใสแบบ Brutalism */
+        .row-ig { background-color: #FF90E8; } /* ชมพูสดใส */
+        .row-shopee { background-color: #FF5722; } /* ส้ม */
+        .row-tiktok { background-color: #FFFFFF; } /* ขาวดำ */
+        .row-project { background-color: #00E676; } /* เขียวนีออน */
 
         .link-main {
             flex: 1;
             display: flex;
             align-items: center;
             padding: 16px;
-            color: white;
+            color: var(--text-main); /* ตัวอักษรสีดำหมด */
             text-decoration: none;
             position: relative; 
         }
         .link-icon {
-            font-size: 20px;
+            font-size: 24px;
             position: absolute;
             left: 20px; 
             width: 25px;
             text-align: center;
-            color: #ffffff; 
+            color: var(--text-main); 
         }
         .link-text {
             width: 100%;
             text-align: center;
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 900;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .link-share {
-            width: 55px;
+            width: 60px;
             background: transparent;
             border: none;
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-size: 18px;
+            border-left: 3px solid var(--border-main);
+            color: var(--text-main);
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
-        .link-share:hover { background-color: rgba(255, 255, 255, 0.2); }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #222222;
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-            transition: bottom 0.3s ease, opacity 0.3s ease;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 1000;
-        }
-        [data-theme="dark"] .toast {
-            background-color: #ffffff;
-            color: #111111;
-        }
-        .toast.show {
-            bottom: 30px;
-            opacity: 1;
-        }
+        .link-share:hover, .link-share:active { background-color: rgba(0, 0, 0, 0.1); }
         
         @media (max-width: 350px) {
             .container { padding: 30px 15px; }
-            .top-btn { top: 15px; width: 35px; height: 35px; font-size: 14px;}
+            .top-btn { top: 15px; width: 40px; height: 40px; font-size: 14px;}
             .share-page-btn { right: 15px; }
-            .theme-toggle-btn { left: 15px; }
-            h1 { font-size: 22px; }
+            h1 { font-size: 26px; }
             .link-icon { left: 15px; }
             .link-main { padding: 12px; }
         }
+
+        /* Background Animated Shapes - KADASHI */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bg-shapes li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            -webkit-font-smoothing: antialiased;
+            /* Neo-Brutalism Text Style (Outline Only) */
+            color: transparent !important; 
+            -webkit-text-stroke: 2px #000;
+            font-weight: 900;
+        }
+
+        /* แจ้งเตือน Toast Popup */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            background-color: #FFF;
+            color: #000;
+            padding: 12px 24px;
+            border: 3px solid #000;
+            border-radius: 0; /* สี่เหลี่ยม */
+            font-size: 16px;
+            font-weight: 900;
+            box-shadow: 6px 6px 0px #000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.1s ease-out;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
+        }
     </style>
 </head>
-<body>
+<body ontouchstart="">
+    <!-- Animated Background Shapes -->
+    <ul class="bg-shapes" id="bg-shapes">
+    </ul>
+    
     <div class="container">
-        <!-- ปุ่ม Theme (มุมซ้ายบน) -->
-        <button id="theme-btn" class="top-btn theme-toggle-btn" title="เปลี่ยนโหมดสี">
-            <i class="fa-solid fa-moon"></i>
-        </button>
-
         <!-- ปุ่มแชร์หน้าเว็บ (มุมขวาบน) -->
-        <button class="top-btn share-page-btn" onclick="shareLink(window.location.href, 'KADASHI - 3D Print Gadgets')" title="แชร์หน้านี้">
-            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        <button class="top-btn share-page-btn" onclick="copyLink(window.location.href)" title="คัดลอกลิงก์">
+            <i class="fa-solid fa-copy"></i>
         </button>
 
-        <!-- รูปโปรไฟล์ -->
-        <img src="profile.jpg" alt="KADASHI Logo" class="profile-pic" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=KADASHI&background=111111&color=ffffff&bold=true&size=120';">
+        <img src="https://scontent.cdninstagram.com/v/t51.82787-19/671754610_17864032440671525_7139666992208324307_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=UgPcse3xiXIQ7kNvwGHhpJM&_nc_oc=Adrb7aTsJZ8kUAJiUK1Ce-Lo8xb41I-muhwtACw2Ml0XTcCg_9KPwA2pdJIBq2aDKgs&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=zapTE0W2zK4AJJCH_lqTsw&_nc_ss=7260f&oh=00_AQJjYUzCTSQkwATBxHLW5on0jYNfmXkBEcF2q2d2Yi2jJw&oe=6AB034AD" alt="KADASHI Logo" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=KADASHI&background=FFFFFF&color=000000&bold=true&size=120&font-size=0.4'">
         
         <h1>KADASHI</h1>
         <p>3D Print Gadgets & Custom Setup</p>
         
-        <!-- รายการปุ่ม 1: Shopee -->
-        <div class="link-row row-shopee">
-            <a href="https://shopee.co.th/kadashilab" class="link-main" target="_blank" rel="noopener noreferrer">
-                <span class="link-icon"><i class="fa-solid fa-bag-shopping"></i></span>
-                <span class="link-text">Shopee</span>
-            </a>
-            <button class="link-share" onclick="shareLink('https://shopee.co.th/kadashilab', 'KADASHI on Shopee')" title="แชร์ Shopee">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
-            </button>
-        </div>
-
-        <!-- รายการปุ่ม 2: Instagram -->
+        <!-- รายการปุ่ม 1: Instagram (พอร์ตโฟลิโอหลัก) -->
         <div class="link-row row-ig">
-            <a href="https://www.instagram.com/kadashilab/" class="link-main" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==" class="link-main" target="_blank">
                 <span class="link-icon"><i class="fa-brands fa-instagram"></i></span>
                 <span class="link-text">Instagram</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://www.instagram.com/kadashilab/', 'KADASHI on IG')" title="แชร์ Instagram">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://www.instagram.com/kadashilab?stkn=MTUwdDZ1NmxieWF0Yg==')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
+            </button>
+        </div>
+
+        <!-- รายการปุ่ม 2: Shopee -->
+        <div class="link-row row-shopee">
+            <a href="https://shopee.co.th/ชื่อร้าน" class="link-main" target="_blank">
+                <!-- เปลี่ยนเป็นไอคอนถุงช้อปปิ้งของจริง -->
+                <span class="link-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span class="link-text">Shopee</span>
+            </a>
+            <button class="link-share" onclick="copyLink('https://shopee.co.th/ชื่อร้าน')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
 
         <!-- รายการปุ่ม 3: TikTok -->
         <div class="link-row row-tiktok">
-            <a href="https://www.tiktok.com/@kadashilab" class="link-main" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat" class="link-main" target="_blank">
                 <span class="link-icon"><i class="fa-brands fa-tiktok"></i></span>
                 <span class="link-text">TikTok</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://www.tiktok.com/@kadashilab', 'KADASHI on TikTok')" title="แชร์ TikTok">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://www.tiktok.com/@kadashilab?_r=1&_t=ZS-99m7yhmUwat')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
 
         <!-- รายการปุ่ม 4: My Projects -->
         <div class="link-row row-project">
-            <a href="https://github.com/sarawutms" class="link-main" target="_blank" rel="noopener noreferrer">
+            <a href="https://ลิงก์โปรเจกต์" class="link-main" target="_blank">
+                <!-- เปลี่ยนเป็นไอคอนแล็ปท็อปและโค้ด -->
                 <span class="link-icon"><i class="fa-solid fa-laptop-code"></i></span>
                 <span class="link-text">My Projects</span>
             </a>
-            <button class="link-share" onclick="shareLink('https://github.com/sarawutms', 'KADASHI Projects')" title="แชร์ Projects">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <button class="link-share" onclick="copyLink('https://ลิงก์โปรเจกต์')" title="คัดลอกลิงก์">
+                <i class="fa-solid fa-copy"></i>
             </button>
         </div>
     </div>
 
-    <!-- Toast แจ้งเตือนเวลาคัดลอกสำเร็จ -->
-    <div id="toast" class="toast">
-        <i class="fa-solid fa-circle-check"></i>
-        <span id="toast-text">คัดลอกลิงก์เรียบร้อยแล้ว!</span>
+    <!-- แจ้งเตือน Toast Popup -->
+    <div id="toast-notification" class="toast">
+        <i class="fa-solid fa-circle-check"></i> คัดลอกลิงก์เรียบร้อยแล้ว!
     </div>
 
     <script>
-        // ระบบจัดการ Dark Mode
-        const themeBtn = document.getElementById('theme-btn');
-        const rootElement = document.documentElement;
-        
-        // ตรวจสอบ Theme จาก localStorage หรือ System Preference
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-            rootElement.setAttribute('data-theme', 'dark');
-            themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        } else {
-            rootElement.setAttribute('data-theme', 'light');
-            themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-        }
+        // ระบบสุ่มพื้นหลัง (Random Background Text - KADASHI)
+        function generateShapes() {
+            const container = document.getElementById('bg-shapes');
+            container.innerHTML = ''; // Clear existing
+            
+            const numShapes = 8; // จำนวนข้อความ (ลดจาก 12 เป็น 8 ไม่ให้รกจอ)
+            const colors = [
+                'rgba(119, 107, 93, 0.2)', 'rgba(176, 166, 149, 0.2)', 
+                'rgba(138, 154, 91, 0.2)', 'rgba(226, 114, 91, 0.2)', 
+                'rgba(223, 168, 55, 0.2)', 'rgba(183, 65, 14, 0.2)', 
+                'rgba(85, 107, 47, 0.2)', 'rgba(235, 227, 213, 0.4)'
+            ];
 
-        themeBtn.addEventListener('click', () => {
-            const isDark = rootElement.getAttribute('data-theme') === 'dark';
-            const nextTheme = isDark ? 'light' : 'dark';
-            rootElement.setAttribute('data-theme', nextTheme);
-            localStorage.setItem('theme', nextTheme);
-            themeBtn.innerHTML = nextTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+            for (let i = 0; i < numShapes; i++) {
+                const li = document.createElement('li');
+                
+                // Randomize properties
+                const size = Math.floor(Math.random() * 50) + 16; // Font size: 16px - 66px
+                const duration = Math.floor(Math.random() * 30) + 20; // 20s - 50s
+                // ใช้ Negative Delay เพื่อให้แอนิเมชันเริ่มทันที (เสมือนว่าวิ่งมาแล้ว) ทำให้เปิดหน้าเว็บมาเจอเลย
+                const delay = -(Math.random() * duration); 
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                // สุ่มทิศทาง (0: ล่างขึ้นบน, 1: บนลงล่าง, 2: ซ้ายไปขวา, 3: ขวาไปซ้าย)
+                const direction = Math.floor(Math.random() * 4);
+                let startX, startY, endX, endY;
+                
+                if (direction === 0) { // ล่าง -> บน
+                    startX = Math.random() * 100; startY = 110;
+                    endX = startX + (Math.random() * 40 - 20); endY = -20;
+                } else if (direction === 1) { // บน -> ล่าง
+                    startX = Math.random() * 100; startY = -20;
+                    endX = startX + (Math.random() * 40 - 20); endY = 110;
+                } else if (direction === 2) { // ซ้าย -> ขวา
+                    startX = -20; startY = Math.random() * 100;
+                    endX = 110; endY = startY + (Math.random() * 40 - 20);
+                } else { // ขวา -> ซ้าย
+                    startX = 110; startY = Math.random() * 100;
+                    endX = -20; endY = startY + (Math.random() * 40 - 20);
+                }
+
+                const endRot = Math.random() * 360 - 180;
+
+                // ตั้งค่าข้อความ KADASHI แทนรูปทรง
+                li.innerText = 'KADASHI';
+                
+                // Styles สำหรับ Text
+                li.style.color = color;
+                li.style.fontSize = size + 'px';
+                li.style.fontWeight = '900';
+                li.style.letterSpacing = '2px';
+                li.style.whiteSpace = 'nowrap';
+                li.style.userSelect = 'none'; // ห้ามคลุมดำ
+                li.style.background = 'transparent'; 
+                li.style.width = 'auto'; 
+                li.style.height = 'auto';
+
+                container.appendChild(li);
+
+                // ใช้ Web Animations API (WAAPI) เพื่อความลื่นไหลสูงสุด (Native Compositor)
+                li.animate([
+                    { transform: `translate3d(${startX}vw, ${startY}vh, 0) rotate(0deg)`, opacity: 0 },
+                    { opacity: 1, offset: 0.1 },
+                    { opacity: 1, offset: 0.9 },
+                    { transform: `translate3d(${endX}vw, ${endY}vh, 0) rotate(${endRot}deg)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });
+            }
+        }
+        
+        // รันฟังก์ชันเมื่อโหลดหน้าเว็บเสร็จ
+        window.addEventListener('DOMContentLoaded', () => {
+            generateShapes();
+
+            // ระบบแปลภาษาตามเครื่อง (Auto-detect language)
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.toLowerCase().startsWith('th')) {
+                // เปลี่ยนข้อความแจ้งเตือน (Toast) เป็นภาษาอังกฤษถ้าเครื่องไม่ใช่ภาษาไทย
+                const toast = document.getElementById('toast-notification');
+                if (toast) toast.innerHTML = '<i class="fa-solid fa-circle-check"></i> Link copied!';
+                
+                // เปลี่ยน Tooltip ของปุ่มคัดลอกทั้งหมดเป็นภาษาอังกฤษ
+                const copyBtns = document.querySelectorAll('[title="คัดลอกลิงก์"]');
+                copyBtns.forEach(btn => {
+                    btn.title = "Copy Link";
+                });
+            }
         });
 
-        // ฟังก์ชันแสดง Toast
-        let toastTimeout;
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toast-text');
-            if (message) toastText.textContent = message;
+        // ระบบแสดงแจ้งเตือน Popup สวยๆ (Toast)
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
             toast.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
+            setTimeout(() => {
                 toast.classList.remove('show');
             }, 2500);
         }
 
-        // ระบบแชร์ลิงก์ / คัดลอกลิงก์
-        function shareLink(url, title) {
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    url: url
-                }).catch(err => {
-                    if (err.name !== 'AbortError') {
-                        copyToClipboard(url);
-                    }
-                });
-            } else {
-                copyToClipboard(url);
-            }
-        }
-
-        function copyToClipboard(url) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(url).then(() => {
-                    showToast("คัดลอกลิงก์เรียบร้อยแล้ว!");
-                }).catch(() => {
-                    fallbackCopy(url);
-                });
-            } else {
-                fallbackCopy(url);
-            }
-        }
-
-        function fallbackCopy(url) {
-            const input = document.createElement("input");
-            input.value = url;
-            document.body.appendChild(input);
-            input.select();
-            try {
+        // ระบบคัดลอกลิงก์ (Copy Link)
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('ไม่สามารถคัดลอกได้:', err);
+                // Fallback for older browsers
+                const tempInput = document.createElement("input");
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
                 document.execCommand("copy");
-                showToast("คัดลอกลิงก์เรียบร้อยแล้ว!");
-            } catch (err) {
-                console.error('คัดลอกไม่สำเร็จ:', err);
-            }
-            document.body.removeChild(input);
+                document.body.removeChild(tempInput);
+                showToast();
+            });
         }
     </script>
 </body>
