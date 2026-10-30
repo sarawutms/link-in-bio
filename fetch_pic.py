@@ -1,18 +1,20 @@
 import urllib.request
 import re
+import html
 
 url = 'https://www.instagram.com/kadashilab/'
-req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'})
+# Instagram returns Open Graph tags to social bot crawlers
+req = urllib.request.Request(url, headers={'User-Agent': 'facebookexternalhit/1.1'})
 
 try:
-    html = urllib.request.urlopen(req).read().decode('utf-8')
-    match = re.search(r'\"avatarLarger\":\"(.*?)\"', html)
+    page_html = urllib.request.urlopen(req).read().decode('utf-8', errors='ignore')
+    match = re.search(r'property="og:image"\s+content="([^"]+)"', page_html)
     
     if not match:
-        match = re.search(r'property=\"og:image\" content=\"(.*?)\"', html)
+        match = re.search(r'content="([^"]+)"\s+property="og:image"', page_html)
         
     if match:
-        img_url = match.group(1).replace('\\u002F', '/').replace('&amp;', '&')
+        img_url = html.unescape(match.group(1))
         print('Found Image URL:', img_url)
         
         req_img = urllib.request.Request(img_url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -20,8 +22,8 @@ try:
             data = response.read()
             out_file.write(data)
             
-        print('Saved as profile.jpg')
+        print('Successfully saved as profile.jpg (size:', len(data), 'bytes)')
     else:
-        print('Image not found.')
+        print('Image not found in page HTML.')
 except Exception as e:
     print('Error:', e)
